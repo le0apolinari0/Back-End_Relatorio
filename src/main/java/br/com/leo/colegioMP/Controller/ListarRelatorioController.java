@@ -1,7 +1,9 @@
 package br.com.leo.colegioMP.Controller;
 
+import br.com.leo.colegioMP.config.RelatorioSwagger;
 import br.com.leo.colegioMP.relatorioDto.ListagemRelatorio;
 import br.com.leo.colegioMP.repository.RelatorioRepository;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,10 +21,10 @@ public class ListarRelatorioController {
     private RelatorioRepository repository;
 
     @GetMapping
+    @RelatorioSwagger.ListarRelatorios
     public ResponseEntity<Page<ListagemRelatorio>> listarRelatorios(
-            @PageableDefault(size = 10 , sort = {"dataCriacao"}) Pageable paginacao) {
-        return ResponseEntity.ok(repository.findAllBy(paginacao).map(
-                relatorio -> new ListagemRelatorio(relatorio)
-        ));
+            @PageableDefault(size = 10, sort = {"dataCriacao"})
+            @ApiParam(value = "Parâmetros de paginação") Pageable paginacao) {
+        return ResponseEntity.ok(repository.findAllBy(paginacao).map(relatorio -> new ListagemRelatorio(relatorio)));
     }
 }

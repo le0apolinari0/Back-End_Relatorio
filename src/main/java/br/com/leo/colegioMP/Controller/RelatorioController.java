@@ -1,16 +1,17 @@
 package br.com.leo.colegioMP.Controller;
 
+import br.com.leo.colegioMP.config.RelatorioSwagger;
 import br.com.leo.colegioMP.model.report.Relatorio;
 import br.com.leo.colegioMP.relatorioDto.*;
 import br.com.leo.colegioMP.repository.RelatorioRepository;
 import br.com.leo.colegioMP.service.RelatorioService;
-import jakarta.transaction.Transactional;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,29 +28,35 @@ public class RelatorioController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Relatorio> buscarRelatorioPorId(@PathVariable Long id) {
+    @RelatorioSwagger.BUSCAR_RELATORIO_POR_ID
+    public ResponseEntity<Relatorio> buscarRelatorioPorId(@PathVariable @ApiParam(value = "ID do relatório") Long id) {
         Relatorio relatorio = service.buscarRelatorioPorId(id);
         return ResponseEntity.ok(relatorio);
     }
 
     @PostMapping
-    public ResponseEntity<Relatorio> cadastrar(@RequestBody @Valid CadastroRelatorio dados) {
+    @RelatorioSwagger.CadastrarRelatorio
+    public ResponseEntity<Relatorio> cadastrar(@RequestBody @Valid @ApiParam(value = "Dados do relatório") CadastroRelatorio dados) {
         Relatorio salvo = service.cadastrarRelatorio(dados);
         return ResponseEntity.status(HttpStatus.CREATED).body(salvo);
     }
 
+
     @PutMapping("/{id}")
-    public ResponseEntity<Relatorio> atualizarRelatorio(@PathVariable Long id, @RequestBody AtualizarRelatorio dados) {
+    @RelatorioSwagger.AtualizarRelatorio
+    public ResponseEntity<Relatorio> atualizarRelatorio(@PathVariable @ApiParam(value = "ID do relatório")
+            Long id, @RequestBody @ApiParam(value = "Dados do relatório") AtualizarRelatorio dados) {
         Relatorio relatorioAtualizado = service.atualizarRelatorio(id, dados);
         return ResponseEntity.ok(relatorioAtualizado);
     }
 
-
     @DeleteMapping("/{id}")
-    public ResponseEntity excluir(@PathVariable Long id) {
+    @RelatorioSwagger.ExcluirRelatorio
+    public ResponseEntity excluir(@PathVariable @ApiParam(value = "ID do relatório") Long id) {
         service.excluirRelatorio(id);
         return ResponseEntity.noContent().build();
     }
+
 }
 
 
