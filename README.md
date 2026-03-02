@@ -1,20 +1,15 @@
-<h2> Sobre Projeto </h2>
-<p> ApiRest Desenvolvido utilizando Java e Spring Boot Para funcionalidade de um CRUD de Relatorios.</p>
+# 📚 School Report Service - API de Gestão de Relatórios
 
-## Conhecimentos posto em pratica.
+> Projeto focado na digitalização de relatórios acadêmicos, transformando processos manuais em uma estrutura de dados eficiente e escalável.
 
-- Criando CRUD Relatorios
-- Isolando códigos de regras de negócio em uma aplicação
-- Implemente princípios em SOLID
-- Utilizando DTOs para representar as informações de input/output da API
-- Realizando validações utilizando o Bean Validation
-- Seguir corretamente os princípios do modelo REST
-- Tratando exceptions na API
-- utilizando o Spring Data JPA para a camada de persistência da API
-- utilizando o Flyway como ferramenta de migrations
-- utilizando  paginação e ordenação nas consultas ao banco de dados
-- utilizando  cache Spring Boot para melhorar a performance de consultas
-- Boa praticas em acessar a interface do EntityManager
+## 🚀 Diferenciais da Arquitetura
+Diferente de um CRUD comum, este projeto aplica padrões de **Engenharia de Software** para garantir performance:
+
+- **Performance com Redis/Cache:** Implementação de Spring Cache para reduzir acessos repetitivos ao banco de dados.
+- **Padrões de Projeto:** Uso rigoroso de **SOLID**, **Clean Code** e **Design Patterns** (DTOs, Mappers).
+- **Resiliência:** Tratamento global de exceções para garantir respostas padronizadas da API.
+- **Segurança & Validação:** Proteção da integridade dos dados com Bean Validation.
+- **Persistência Evolutiva:** Migrations gerenciadas via **Flyway**, garantindo versionamento do banco de dados.
 
 ## Protótipo de Telas
 
